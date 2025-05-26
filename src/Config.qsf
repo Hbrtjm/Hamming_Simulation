@@ -1,0 +1,50 @@
+# === Switches SW[0..11] ===
+set_location_assignment PIN_AA23 -to SW[0]
+set_location_assignment PIN_AB26 -to SW[1]
+set_location_assignment PIN_AB25 -to SW[2]
+set_location_assignment PIN_AC27 -to SW[3]
+set_location_assignment PIN_AC26 -to SW[4]
+# set_location_assignment PIN_AC24 -to SW[5]
+# set_location_assignment PIN_AC23 -to SW[6]
+# set_location_assignment PIN_AD25 -to SW[7]
+# set_location_assignment PIN_AD24 -to SW[8]
+# set_location_assignment PIN_AE27 -to SW[9]
+# set_location_assignment PIN_W5   -to SW[10]
+# set_location_assignment PIN_V10  -to SW[11]
+
+# === 7-Segment HEX0 ===
+set_location_assignment PIN_AE8  -to HEX0_D[0]
+set_location_assignment PIN_AF9  -to HEX0_D[1]
+set_location_assignment PIN_AH9  -to HEX0_D[2]
+set_location_assignment PIN_AD10 -to HEX0_D[3]
+set_location_assignment PIN_AF10 -to HEX0_D[4]
+set_location_assignment PIN_AD11 -to HEX0_D[5]
+set_location_assignment PIN_AD12 -to HEX0_D[6]
+
+# === 7-Segment HEX1 ===
+set_location_assignment PIN_AG13 -to HEX1_D[0]
+set_location_assignment PIN_AE16 -to HEX1_D[1]
+set_location_assignment PIN_AF16 -to HEX1_D[2]
+set_location_assignment PIN_AG16 -to HEX1_D[3]
+set_location_assignment PIN_AE17 -to HEX1_D[4]
+set_location_assignment PIN_AF17 -to HEX1_D[5]
+set_location_assignment PIN_AD17 -to HEX1_D[6]
+
+# === 7-Segment HEX2 ===
+set_location_assignment PIN_AE7  -to HEX2_D[0]
+set_location_assignment PIN_AF7  -to HEX2_D[1]
+set_location_assignment PIN_AH5  -to HEX2_D[2]
+set_location_assignment PIN_AG4  -to HEX2_D[3]
+set_location_assignment PIN_AB18 -to HEX2_D[4]
+set_location_assignment PIN_AB19 -to HEX2_D[5]
+set_location_assignment PIN_AE19 -to HEX2_D[6]
+
+# === Red LEDs LEDR[0..7] ===
+set_location_assignment PIN_AJ6 -to LEDR[0]
+set_location_assignment PIN_AK5 -to LEDR[1]
+set_location_assignment PIN_AJ5 -to LEDR[2]
+set_location_assignment PIN_AJ4 -to LEDR[3]
+set_location_assignment PIN_AK3 -to LEDR[4]
+set_location_assignment PIN_AH4 -to LEDR[5]
+set_location_assignment PIN_AJ3 -to LEDR[6]
+# set_location_assignment PIN_AJ2 -to LEDR[7]
