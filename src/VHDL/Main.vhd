@@ -27,13 +27,15 @@ entity Main is
         SW          : in    STD_LOGIC_VECTOR(4 downto 0);
         -- Data encoded with Hamming code display
         LED         : out   STD_LOGIC_VECTOR(6 downto 0);
+        LED_OUT     : out   STD_LOGIC_VECTOR(2 downto 0);
         -- Initial data display
         HEX0_D      : out   STD_LOGIC_VECTOR(6 downto 0);
         -- Corrupted data display
         HEX1_D      : out   STD_LOGIC_VECTOR(6 downto 0);
         -- Fixed data display
         HEX2_D      : out   STD_LOGIC_VECTOR(6 downto 0);
-        CLOCK100MHZ : in    STD_LOGIC
+        CLOCK100MHZ : in    STD_LOGIC;
+        CLDL        : out   STD_LOGIC
     );
 end Main;
 
@@ -67,22 +69,26 @@ architecture Behavioral of Main is
     component Hamming_Generator is 
         Port( 
             INPUT : in  STD_LOGIC_VECTOR(3 downto 0);
-            HCODE : out STD_LOGIC_VECTOR(6 downto 0)
+            HCODE : out STD_LOGIC_VECTOR(6 downto 0);
+            CLK   : in STD_LOGIC
         );
     end component;
 
     component Signal_Transmitter_Receiver is
         Port (
-            TX  : in  STD_LOGIC_VECTOR(6 downto 0);
-            RX  : out STD_LOGIC_VECTOR(6 downto 0);
-            CLK : in STD_LOGIC
+            TX          : in  STD_LOGIC_VECTOR(6 downto 0);
+            RX          : out STD_LOGIC_VECTOR(6 downto 0);
+            SEND_CLK    : in STD_LOGIC
+--            CLK         : in STD_LOGIC
         );
     end component;
 
     component Hamming_Corrector is 
         Port( 
             HCODEIN : in  STD_LOGIC_VECTOR (6 downto 0);
-            DECODED : out STD_LOGIC_VECTOR (3 downto 0)
+            CORRECTION : out STD_LOGIC_VECTOR(2 downto 0);
+            DECODED : out STD_LOGIC_VECTOR (3 downto 0);
+            CLK : in STD_LOGIC
         );
     end component;
 
@@ -137,7 +143,8 @@ begin
     HammingGenerator: Hamming_Generator 
         port map ( 
             INPUT => DATA,
-            HCODE => ENCODED_HAMMING
+            HCODE => ENCODED_HAMMING,
+            CLK   => CLOCK_LOCAL
         );    
     
     LED <= ENCODED_HAMMING;
@@ -146,7 +153,8 @@ begin
         port map (
             TX => ENCODED_HAMMING,
             RX => MODIFIED_HAMMING,
-            CLK => CLOCK100MHZ
+            SEND_CLK => CLOCK_LOCAL
+--            CLK => CLOCK100MHZ
         );
 
     CorruptedDisplay: SEG7 
@@ -161,7 +169,9 @@ begin
     HammingCorrector: Hamming_Corrector 
         port map (
             HCODEIN => MODIFIED_HAMMING,
-            DECODED => FINAL_DATA
+            CORRECTION => LED_OUT,
+            DECODED => FINAL_DATA,
+            CLK     => CLOCK_LOCAL
         );
     
     CorrectedDisplay: SEG7 
@@ -172,5 +182,6 @@ begin
     
     TX7SEG <= SIGNAL_TO_GENERATOR;
     RX7SEG <= FINAL_DATA;
+    CLDL <= CLOCK_LOCAL;
 
 end Behavioral;
